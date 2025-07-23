@@ -90,7 +90,9 @@ int main() {
 
     printf("Simulação finalizada após %d passo(s).\n", passos_movidos);
     printf("Posição Final do Bispo: %c%d\n", 'a' + coluna_atual_bispo, linha_atual_bispo + 1);
-
+    
+    }
+    
     return 0;
 }
 
