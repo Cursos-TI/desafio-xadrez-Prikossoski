@@ -27,7 +27,6 @@ int main() {
     } else {
         printf("Movimento da Torre interrompido por sair do tabuleiro.\n");
     }
-        
    
 
 
@@ -91,8 +90,35 @@ int main() {
     printf("Simulação finalizada após %d passo(s).\n", passos_movidos);
     printf("Posição Final do Bispo: %c%d\n", 'a' + coluna_atual_bispo, linha_atual_bispo + 1);
     
-    }
     
+
+    //Mover Cavalo duas casas para baixo e uma casa para a esquerda
+
+    int linha_cavalo = 0;
+    int coluna_cavalo = 0;
+
+    printf("Posicao inicial do cavalo: (%d, %d)\n\n", linha_cavalo, coluna_cavalo);
+
+    // Mover duas casas para baixo
+    printf("Movendo o cavalo para BAIXO:\n");
+    for (int i = 0; i < 2; i++) {
+        linha_cavalo += 1;
+        printf("Posicao atual (for): (%d, %d)\n", linha_cavalo, coluna_cavalo);
+    }
+
+    printf("\n");
+
+    // Mover uma casa para a esquerda
+    printf("Movendo o cavalo para a ESQUERDA:\n");
+    int j = 0;
+    while (j < 1) {
+        coluna_cavalo -= 1;
+        printf("Posicao atual (while): (%d, %d)\n", linha_cavalo, coluna_cavalo);
+        j++;
+        }
+
+    printf("\n");
+    printf("Posicao final do cavalo: (%d, %d)\n", linha_cavalo, coluna_cavalo);
+
     return 0;
 }
-
