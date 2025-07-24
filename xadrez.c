@@ -3,122 +3,73 @@
 
 // Desafio de Xadrez - MateCheck
 
+#include <stdio.h>
+// Cavalo (Cima Cima Direita)
+void moverCavalo(int movimentos) {
+    int movimentosRealizados = 0;
+
+    printf("\nMovimento do Cavalo:\n");
+    for (int i = 0; i < movimentos; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (j == 2) {
+                printf("Direita\n"); // Terceiro passo: direita
+                break; // termina este loop
+            }
+
+            if (j < 2) {
+                printf("Cima\n"); // Primeiros dois passos: cima
+                continue; // volta para o início do loop j
+            }
+        }
+        movimentosRealizados++;
+    }
+}
+
+// Bispo (Diagonal Cima Direita)
+void moverBispo(int casas) {
+    if (casas <= 0) return;
+
+    // Loop externo: simula o movimento vertical
+    for (int v = 0; v < 1; v++) {
+        // Loop interno: simula o movimento horizontal
+        for (int h = 0; h < 1; h++) {
+            printf("Cima Direita\n");
+        }
+    }
+
+    moverBispo(casas - 1); // chamada recursiva
+}
+
+void moverRainha(int casas) {
+    if (casas <= 0) return;
+    printf("Esquerda\n");
+    moverRainha(casas - 1);
+}
+
+//Torre para a Direita
+void moverTorre(int casas) {
+    if (casas <= 0) return; // Condição de parada
+    printf("Direita\n");
+    moverTorre(casas - 1); // Chamada recursiva
+}
+
 int main() {
+   // Movimento da TORRE usando recursão
+    int casasTorre = 4;
+    printf("Movimento da Torre:\n");
+    moverTorre(casasTorre);
 
-    char coluna_atual = 'a'; // Começa na coluna 'a'
-    char linha_atual = 1;     // Começa na linha 1
-    int i = 1;
+    // Movimento do BISPO usando recursão + loops aninhados
+    int casasBispo = 5;
+    printf("\nMovimento do Bispo:\n");
+    moverBispo(casasBispo);
 
-    printf("Iniciando o movimento da Torre...\n");
-    printf("Posição inicial: %c%d\n", coluna_atual, linha_atual);
+    // Movimento da RAINHA usando recursão
+    int casasRainha = 3;
+    printf("\nMovimento da Rainha:\n");
+    moverRainha(casasRainha);
 
-    for(int i = 0; i < 5; i++)
-        coluna_atual++; // Move a torre uma casa para a direita
-        
-        if (coluna_atual > 'h') {
-            printf("A Torre sairia do tabuleiro na casa %c%d! Movimento interrompido.\n", coluna_atual, linha_atual);
-        }
-        
-        // A posição da torre após cada passo
-        printf("Passo %d: Nova posição: %c%d\n", i + 1, coluna_atual, linha_atual);
-         // Mensagem final para a Torre
-    if (coluna_atual <= 'h') { // Verifica se não saiu do tabuleiro
-        printf("Movimento da Torre para a direita concluído. Posição final: %c%d\n", coluna_atual, linha_atual);
-    } else {
-        printf("Movimento da Torre interrompido por sair do tabuleiro.\n");
-    }
-   
-
-
-
-     //---Mover a Rainha ---
-
-   char coluna_atual_rainha = 'h';
-   int linha_atual_rainha = 4; // Corrected: Changed 'char' to 'int' for line number
-   int passos_contados_rainha = 0;
-
-   printf("Movimento da Rainha para a ESQUERDA...\n");
-   printf("Posição inicial: %c%d\n", coluna_atual_rainha, linha_atual_rainha);
-
-   do {
-    coluna_atual_rainha--;
-
-    if (coluna_atual_rainha < 'a') {
-    printf("Passo %d: A Rainha tentou sair do tabuleiro pela esquerda!\n", passos_contados_rainha + 1);
-    break; 
-    }
-    printf("Passo %d: Moveu para a casa %c%d\n", passos_contados_rainha + 1, coluna_atual_rainha, linha_atual_rainha);
-    passos_contados_rainha++;
-     
-   } while (passos_contados_rainha < 8); // Condição: continuar enquanto não tiver dado 8 passos
-   
-   if (coluna_atual_rainha >= 'a') {
-    printf("Movimento para a esquerda concluído. Posição final: %c%d\n", coluna_atual_rainha, linha_atual_rainha);
-   } else {
-    printf("Movimento para a esquerda interrompido por sair do tabuleiro.\n");
-   }
-
-
-  //Mover o Bispo 5 Casas para Diagonal
-
-    const int MAX_PASSOS = 5; // Define o número máximo de passos desejados.
-
-    int linha_atual_bispo = 0; 
-    int coluna_atual_bispo = 0;
-    int passos_movidos = 0;
-
-    printf("Simulação do movimento do Bispo no Xadrez\n");
-    printf("Posição Inicial do Bispo: %c%d\n\n", 'a' + coluna_atual_bispo, linha_atual_bispo + 1);
-
-    while (passos_movidos < MAX_PASSOS) {
-        
-        int proxima_linha = linha_atual_bispo + 1;
-        int proxima_coluna = coluna_atual_bispo + 1;
-
-        if (proxima_linha > 7 || proxima_coluna > 7) {
-            printf("Fim do movimento: O Bispo não pode avançar mais nesta diagonal, pois sairia do tabuleiro.\n");
-            break; 
-        }
-
-        linha_atual_bispo = proxima_linha;
-        coluna_atual_bispo = proxima_coluna;
-        passos_movidos++; 
-
-        printf("Passo %d: Moveu para a casa %c%d\n", passos_movidos, 'a' + coluna_atual_bispo, linha_atual_bispo + 1);
-    }
-
-    printf("Simulação finalizada após %d passo(s).\n", passos_movidos);
-    printf("Posição Final do Bispo: %c%d\n", 'a' + coluna_atual_bispo, linha_atual_bispo + 1);
-    
-    
-
-    //Mover Cavalo duas casas para baixo e uma casa para a esquerda
-
-    int linha_cavalo = 0;
-    int coluna_cavalo = 0;
-
-    printf("Posicao inicial do cavalo: (%d, %d)\n\n", linha_cavalo, coluna_cavalo);
-
-    // Mover duas casas para baixo
-    printf("Movendo o cavalo para BAIXO:\n");
-    for (int i = 0; i < 2; i++) {
-        linha_cavalo += 1;
-        printf("Posicao atual (for): (%d, %d)\n", linha_cavalo, coluna_cavalo);
-    }
-
-    printf("\n");
-
-    // Mover uma casa para a esquerda
-    printf("Movendo o cavalo para a ESQUERDA:\n");
-    int j = 0;
-    while (j < 1) {
-        coluna_cavalo -= 1;
-        printf("Posicao atual (while): (%d, %d)\n", linha_cavalo, coluna_cavalo);
-        j++;
-        }
-
-    printf("\n");
-    printf("Posicao final do cavalo: (%d, %d)\n", linha_cavalo, coluna_cavalo);
-
-    return 0;
+    // Movimento do CAVALO com loops complexos (2x Cima, 1x Direita)
+    int movimentosCavalo = 2; // número de "L" que o cavalo fará
+    moverCavalo(movimentosCavalo);
 }
